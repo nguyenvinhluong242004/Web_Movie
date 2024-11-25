@@ -1,0 +1,28 @@
+{
+  "name": "web_movie_private",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect ./src/app/servers/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenvinhluong242004/Web_Movie.git"
+  },
+  "author": "Nguyễn Vĩnh Lương",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nguyenvinhluong242004/Web_Movie/issues"
+  },
+  "homepage": "https://github.com/nguyenvinhluong242004/Web_Movie#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7"
+  }
+}
