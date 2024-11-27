@@ -22,7 +22,7 @@
                 </a>
                 <div class="btn-search-full" style="position: relative; width: 360px;">
                     <input type="text"
-                        style="padding-left: 10px; height: 32px; font-size: 12px; width: 100%; padding-right: 30px;"
+                        style="background-color: #383737d2; color: #cccccc; padding-left: 10px; height: 32px; font-size: 12px; width: 100%; padding-right: 30px;"
                         id="txtInput" placeholder="Tìm phim.." aria-label="Search">
                     <a class="bi bi-search"
                         style="cursor: pointer; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 18px; color: #000;"></a>
@@ -31,85 +31,38 @@
                     <div class="input-group" style="display: flex; justify-content: flex-end; width: 100%;">
                         <div class="btn-search mr-3">
                             <i class="bi bi-search" href="#" id="navDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" style="font-size: 24px; color: #fff;"></i>
+                                aria-expanded="false" style="font-size: 24px; color: #cccccc;"></i>
                             <ul class="dropdown-menu mr-0 mt-1" aria-labelledby="navDropdown"
                                 style="background-color: #cccccc; width: 100vw !important; left: 0 !important; right: 0 !important; padding: 0 !important; margin: 0 !important;">
                                 <li class="" style="position: relative; width: 100%; margin-right: 10px;">
                                     <input type="text"
                                         style="height: 32px; font-size: 12px; width: 100%; padding-right: 30px;"
                                         id="txtInput-ver2" placeholder="Tìm truyện..." aria-label="Search">
-                                    <a class="bi bi-search" @click="searchComicVer2"
+                                    <a class="bi bi-search"
                                         style="cursor: pointer; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 18px; color: #000;"></a>
                                 </li>
-                                <li v-for="type in comics_type"><a class="dropdown-item" :href="DOMAIN+'type?name=' + type.slug+'&page=1'">[[ type.name]]</a></li>
+                                <li><a class="dropdown-item" href=""></a></li>
                             </ul>
                         </div>
                         <div class="mr-3 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-person-circle" style="cursor: pointer; font-size: 24px; color: #fff;"></i>
+                            <i class="bi bi-person-circle"
+                                style="cursor: pointer; font-size: 24px; color: #cccccc;"></i>
                         </div>
                         <div class="btn-menu mr-3"
                             style="width: 30px; background-color: rgb(255, 187, 0); border-radius: 3px;">
-                            <i class="bi bi-list" style="font-size: 24px; color: #fff;"></i>
+                            <i class="bi bi-list" style="font-size: 24px; color: #cccccc;"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cecece;">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav" style="height: 100%;">
-                            <li class="nav-item border-end pe-3" style="background-color: #fff;">
-                                <a class="nav-link" :href="DOMAIN"><i class="bi bi-house-door-fill"
-                                        style="color: purple"></i></a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">HOT</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">THEO DÕI</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">LỊCH SỬ</a>
-                            </li>
-                            <li class="nav-item dropdown border-end pe-3">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    THỂ LOẠI
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 98vw !important; max-width: 1030px; left: -276% !important; right: 0 !important; padding: 0 !important; margin: 0 !important;">
-                                    <li v-for="type in comics_type"><a class="dropdown-item" :href="DOMAIN+'type?name=' + type.slug+'&page=1'">[[ type.name]]</a></li>
-                                    
-                                </ul>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">TÌM TRUYỆN</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">MANHUA</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">MANHWA</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">NGÔN TÌNH</a>
-                            </li>
-                            <li class="nav-item border-end pe-3">
-                                <a class="nav-link" href="#">CON GÁI</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">CON TRAI</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+
 
             <div class="notify mx-auto d-flex mb-3 mt-3"
-                style="width: 96%; border: 1px solid blue; display: flex; align-items: stretch;">
+                style="width: 96%; border: 1px solid rgb(64, 64, 73); display: flex; align-items: stretch;">
                 <div class="text-center"
-                    style="width: 36px; background-color: rgb(0, 132, 255); display: flex; justify-content: center; padding-top: 7px; padding-left: 7px; padding-right: 7px;">
-                    <i class="bi bi-info-circle-fill" style="color: #244d83;"></i>
+                    style="width: 36px; background-color: rgb(26, 27, 29); display: flex; justify-content: center; padding-top: 7px; padding-left: 7px; padding-right: 7px;">
+                    <i class="bi bi-info-circle-fill" style="color: #b9b9b9;"></i>
                 </div>
                 <div class="d-flex align-items-center m-2" style="font-size: 13.6px; color: #cccccc;">
                     Website xem phim cá nhân, nâng cao tối đa trải nghiệm người dùng. Chúng tôi có đặt quảng cáo để
@@ -118,11 +71,56 @@
                 </div>
             </div>
 
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #131010; color: #504e4e;">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav" style="height: 100%;">
+                            <li class="nav-item border-end pe-3" style="color: #cccccc; cursor: pointer;">
+                                <a class="nav-link" :href="DOMAIN" style="color: #cccccc"><i
+                                        class="bi bi-house-door-fill" style="color: #cccccc"></i> Trang chủ</a>
+                            </li>
+                            <li class="nav-item dropdown border-end pe-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="color: #cccccc">
+                                    Thể loại
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                                    style="width: 98vw !important; max-width: 1030px; left: -276% !important; right: 0 !important; padding: 0 !important; margin: 0 !important;">
+                                    <li><a class="dropdown-item" href=""></a></li>
+
+                                </ul>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Phim lẻ</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Đang chiếu</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Lịch chiếu</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Hoàn thành</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Sắp chiếu</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Top 10 HH3D</a>
+                            </li>
+                            <li class="nav-item border-end pe-3">
+                                <a class="nav-link" href="#" style="color: #cccccc">Đáng xem</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
             {{{ body }}}
 
 
             <div class="footer mt-3 d-flex align-items-center"
-                style="background-color: black; color: #fff; height: 100px;">
+                style="background-color: black; color: #cccccc; height: 100px;">
                 <div class="col-12 text-center p-2 footer-change">
                     Copyright <i class="bi bi-c-circle"></i> Nguyễn Vĩnh Lương
                 </div>
@@ -144,6 +142,10 @@
 
     <!-- Owl Carousel JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/vue-app.js"></script>
 </body>
 
 </html>

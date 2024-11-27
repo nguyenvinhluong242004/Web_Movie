@@ -1,19 +1,19 @@
 const FetchDataProvider = require('../models/FetchDataProvider');
 
-class HomeController {
+class DetailMovieController {
 
     // [GET] /
     index(req, res) {
-        res.render('home')
+        res.render('detail-movie', { title: '' });
     }
 
-    // [POST] /api/home
+    // [POST] /api/detail-movie
     async callAPI(req, res) {
-        const { page } = req.body;
-        FetchDataProvider.fetchListMovie(page)
+        const { slug } = req.body;
+        FetchDataProvider.fetchDetailMovie(slug)
             .then(data => {
-                console.log('Movies data:', data);
-                return res.json({ success: true, data: data.data, message: 'Lấy dữ liệu thành công' });
+                //console.log('Movies data:', data);
+                return res.json({ success: true, data: data, message: 'Lấy dữ liệu thành công' });
             })
             .catch(error => {
                 console.error('Failed to fetch comics:', error);
@@ -23,4 +23,4 @@ class HomeController {
 
 }
 
-module.exports = new HomeController;
+module.exports = new DetailMovieController;

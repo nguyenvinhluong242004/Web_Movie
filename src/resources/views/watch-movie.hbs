@@ -1,0 +1,164 @@
+<div class="content-movie ">
+    <div class="video-container">
+        <video controls></video>
+        <div class="video-overlay">
+            <div id="playButton" class="bi bi-play-fill" style="color: #fff; font-size: 90px; cursor: pointer;"></div>
+        </div>
+    </div>
+    <div class="dim-overlay"></div>
+    <div class="p-2" style="color: #cccccc;">
+
+        <div class="d-flex btnControls" style="justify-content: right;">
+            <a href="" class="pr-1 pl-1 mr-2"
+                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px;"><i
+                    class="bi bi-caret-left-fill"></i> Tập trước</a>
+            <a href="" class="pr-1 pl-1 mr-2"
+                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px;">Tập tiếp
+                theo <i class="bi bi-caret-right-fill"></i></a>
+            <div id="toggleLights" class="pr-1 pl-1 mr-2"
+                style="color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"><i
+                    class="bi bi-brightness-high-fill"></i> Tắt đèn</div>
+            <div class="pr-1 pl-1 mr-2"
+                style="color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"><i
+                    class="bi bi-exclamation-triangle-fill"></i> Báo lỗi</div>
+        </div>
+
+        <div class="ml-4 mt-3 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">
+            <a href="" class="pr-2 pl-2 p-1 mr-2"
+                style="font-size: 14px; color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(141, 15, 214);">
+                <span>Phần 1</span>
+            </a>
+            <a href="" class="pr-2 pl-2 p-1"
+                style="font-size: 14px; color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(141, 15, 214);">
+                <span>Phần 2</span>
+            </a>
+        </div>
+
+        <div class="d-flex ml-2 mr-2">
+            <div class="bi bi-book-half mr-2" style="color: rgb(255, 166, 0);"></div>
+            <h5 style="color: rgb(255, 166, 0);">Danh sách tập phim</h5>
+        </div>
+        <hr color="gray" style="margin: 2px;">
+
+        <div class="mb-3" style="background-color: #131010;">
+            <div class="button-grid ml-4 pt-3 pb-3">
+                <a :href="DOMAIN+'watch-movie?id='+episode.slug" class="btn btn-dark"
+                    v-for="episode in listEpisodes.server_data">[[ episode.name ]]</a>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">
+            <div class="ml-2 pr-2 bi bi-calendar2-event-fill"
+                style="color: #ec19d0; border: none; text-align: left; border-radius: 4px;">
+                Phim chiếu 1 tập vào trưa <strong style="color: rgb(231, 47, 14);">CHỦ NHẬT</strong>
+            </div>
+        </div>
+
+
+        <h5 style="color: rgb(255, 166, 0);" class="ml-2 mt-2">Giới thiệu về LuongSoSad</h5>
+
+        <hr color="gray" style="margin: 2px;">
+        <div class="ml-2 mr-2 mb-4 mt-1">
+            Chào mừng bạn đến với website xem phim online của LuongSoSad. Chi tiết về LuongSoSad là
+            một kẻ siêng ăn lười làm, thích làm những điều vô vị, suy nghĩ vu vơ, có trí tưởng tượng phong phú
+            nhưng khi thực hành thì bằng không, thích làm những điều lớn lao nhưng được vài hôm rồi bỏ, có kế
+            hoạch nhưng không đủ kiên trì, có ý chí nhưng không đủ nghị lực, có niềm tin nhưng không đủ khả
+            năng, thành sự thì ít, bại sự có thừa.
+        </div>
+        <div class="d-flex ml-2 mr-2">
+            <div class="bi bi-journal-text mr-2" style="color: rgb(255, 166, 0);"></div>
+            <h5 style="color: rgb(255, 166, 0);">NỘI DUNG PHIM</h5>
+
+        </div>
+        <hr color="gray" style="margin: 2px;">
+        <div class="ml-2 mr-2 mb-3 mt-1" v-html="detailMovie.content">
+        </div>
+
+
+        <div class="d-flex ml-2 mr-2 mt-4">
+            <div class="bi bi-chat-fill mr-2 ml-2" style="color: rgb(255, 166, 0);"></div>
+            <h5 style="color: rgb(255, 166, 0);">Bình luận</h5>
+        </div>
+        <hr class="ml-2 mr-2" color="gray" style="margin: 2px;">
+
+        <div class="comment container mt-4">
+            <!-- Thông báo cảnh báo -->
+            <i class="text-danger">
+                Bình luận không được tính để tăng cấp độ. Tài khoản không bình luận được là do: avatar nhạy cảm,
+                spam link hoặc chưa đủ cấp độ.
+            </i>
+
+            <!-- Khu vực nhập bình luận -->
+
+            <div class="mb-1 mt-3">
+                <textarea style="background-color: #ccccccd2;" class="form-control" rows="3" maxlength="150"
+                    placeholder="Mời bạn thảo luận, vui lòng không spam, share link kiếm tiền, thiếu lành mạnh,... để tránh bị khóa tài khoản"></textarea>
+            </div>
+
+            <button class="p-0 mb-3 pr-3 pl-3"
+                style="color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(15, 95, 214);">
+                Gửi </button>
+
+            <!-- Danh sách bình luận -->
+            <div class="mb-3">
+                <div class="card-comment d-flex">
+                    <div class="mr-2">
+                        <img src="" class="" style="width: 50px; border: 1px solid seashell;" alt="Avatar">
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="" style="border: 1px solid black;">
+                            <div class="d-flex align-items-center">
+                                <h6 class="mb-0 m-2" style="color: rgb(0, 85, 255);">LuongSoSad</h6>
+                                <span class="badge bg-success" style="height: 20px;">Admin</span>
+                            </div>
+                            <hr color="gray" style="margin: 3px; height: 0.1px;">
+                            <div class="m-2">
+
+                                <div>Chém gió nhiều hơn tại đây...</div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex small text-muted align-items-center">
+                            <p class="text-muted mb-1 small" style="font-size: 13px;">Vừa xong</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="card-comment d-flex">
+                    <div class="mr-2">
+                        <img src="" class="" style="width: 50px; border: 1px solid seashell;" alt="Avatar">
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="" style="border: 1px solid black;">
+                            <div class="d-flex align-items-center">
+                                <h6 class="mb-0 m-2" style="color: rgb(0, 85, 255);"></h6>
+                                <span class="badge bg-success" style="height: 20px;">Cấp </span>
+                            </div>
+                            <hr color="gray" style="margin: 3px; height: 0.1px;">
+                            <div class="m-2">
+
+                                <div></div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex small text-muted align-items-center">
+                            <p class="text-muted mb-1 small" style="font-size: 13px;">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút xem thêm -->
+            <div class="text-center">
+                <button class="btn btn-outline-secondary">+ Xem thêm bình
+                    luận</button>
+            </div>
+        </div>
+
+    </div>
+</div>
