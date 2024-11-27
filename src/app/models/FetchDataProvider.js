@@ -48,6 +48,26 @@ class FetchDataProvider {
                 throw error; // Ném lỗi để xử lý bên ngoài nếu cần
             });
     }
+
+    fetchSearchMovie(keyword, page) {
+        const url = `https://phimapi.com/v1/api/tim-kiem?keyword=${keyword}&limit=10&page=${page}`;
+        
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched data:', data);
+                return data; // Trả về dữ liệu
+            })
+            .catch(error => {
+                console.error('Error fetching comics:', error);
+                throw error; // Ném lỗi để xử lý bên ngoài nếu cần
+            });
+    }
 }
 
 module.exports = new FetchDataProvider;

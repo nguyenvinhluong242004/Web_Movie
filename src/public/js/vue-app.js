@@ -3,14 +3,14 @@ const vueApp = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     data: {
-        //DOMAIN: 'https://comic-sv1.onrender.com/',
-        DOMAIN: 'http://localhost:8888/',
+        DOMAIN: 'https://movie-sv1.onrender.com/',
+        //DOMAIN: 'http://localhost:8888/',
         domain_image: 'https://phimimg.com',
         domain_cdn_read: '',
         middle_domain: '/uploads/comics/',
 
         per_page: 10,
-        total_page: 100,
+        total_page: 1,
         total_items: 0,
         page: 1,
 
@@ -23,6 +23,7 @@ const vueApp = new Vue({
         detailMovie: [],
         listEpisodes: [],
 
+        movieNameSearch: '',
     },
     methods: {
         async fetchListMovies() {
@@ -33,9 +34,12 @@ const vueApp = new Vue({
 
                 if (response.data.success) {
                     console.log(response.data)
-
                     this.listMovies = response.data.data.items;
                     this.image_movies = response.data.data.seoOnPage.og_image;
+                    this.per_page = response.data.data.params.pagination.totalItemsPerPage;
+                    this.total_page = response.data.data.params.pagination.totalPages;
+                    this.total_items = response.data.data.params.pagination.totalItems;
+
                 } else {
                     alert(response.data.message);
                 }
@@ -75,14 +79,14 @@ const vueApp = new Vue({
             const playButton = document.getElementById("playButton");
             const video = document.querySelector("video");
             const poster = this.detailMovie.thumb_url;
-            const videoSrc = this.listEpisodes.server_data[this.episodeNumber-1].link_m3u8;
+            const videoSrc = this.listEpisodes.server_data[this.episodeNumber - 1].link_m3u8;
             console.log(poster);
             video.setAttribute('poster', poster);
-            
+
             playButton.addEventListener("click", function () {
                 // Ẩn overlay khi nút được nhấn
                 document.querySelector(".video-overlay").classList.add("hidden");
-                
+
                 // Kiểm tra nếu HLS được hỗ trợ
                 if (Hls.isSupported()) {
                     const hls = new Hls();
@@ -115,6 +119,48 @@ const vueApp = new Vue({
                 }
             });
         },
+        async fetchSearchMovies(keyword) {
+            this.movieNameSearch = keyword;
+            try {
+                const response = await axios.post('/search/api', {
+                    keyword: this.movieNameSearch,
+                    page: this.page
+                });
+
+                if (response.data.success) {
+                    console.log(response.data)
+                    this.listMovies = response.data.data.items;
+                    this.image_movies = response.data.data.seoOnPage.og_image;
+                    this.per_page = response.data.data.params.pagination.totalItemsPerPage;
+                    this.total_page = response.data.data.params.pagination.totalPages;
+                    this.total_items = response.data.data.params.pagination.totalItems;
+
+                    sessionStorage.setItem('detailMovie', JSON.stringify(this.detailMovie));
+                } else {
+                    alert(response.data.message);
+                }
+            } catch (error) {
+                console.error('Lỗi đăng nhập:', error);
+                alert('Có lỗi xảy ra khi đăng nhập');
+            }
+
+        },
+        searchMovie() {
+            if ($('#txtInput').val().trim()) {
+                console.log($('#txtInput').val())
+                window.location.href = `/search?keyword=${encodeURIComponent($('#txtInput').val()).replace(/%20/g, "+")}&page=1`;
+            } else {
+                //alert("Vui lòng nhập từ khóa tìm kiếm!");
+            }
+        },
+        searchMovieVer2() {
+            if ($('#txtInput-ver2').val().trim()) {
+                console.log($('#txtInput-ver2').val())
+                window.location.href = `/search?keyword=${encodeURIComponent($('#txtInput-ver2').val()).replace(/%20/g, "+")}&page=1`;
+            } else {
+                //alert("Vui lòng nhập từ khóa tìm kiếm!");
+            }
+        },
         fetchDataStorage() {
             console.log('get');
             this.detailMovie = JSON.parse(sessionStorage.getItem('detailMovie'));
@@ -124,7 +170,7 @@ const vueApp = new Vue({
             // this.dataUser = JSON.parse(sessionStorage.getItem('dataUser'));
             // this.dataLevel = JSON.parse(sessionStorage.getItem('dataLevel'));
             // console.log(this.dataUser)
-            // this.comicNameSearch = JSON.parse(sessionStorage.getItem('comicNameSearch'));
+            this.movieNameSearch = JSON.parse(sessionStorage.getItem('movieNameSearch'));
             // // this.comicName = JSON.parse(sessionStorage.getItem('comicName'));
             // this.comicNumber = JSON.parse(sessionStorage.getItem('comicNumber'));
             // this.dataComicFavor = JSON.parse(sessionStorage.getItem('dataComicFavor'));
@@ -180,17 +226,17 @@ const vueApp = new Vue({
             }
         }
 
-        // if (window.location.pathname === '/search') {
-        //     const urlParams = new URLSearchParams(window.location.search);
-        //     const comicNameSearch = urlParams.get('keyword');
-        //     this.page = parseInt(urlParams.get('page'), 10)
-        //     if (comicNameSearch) {
-        //         console.log(comicNameSearch)
-        //         console.log(this.page)
-        //         this.comicNameSearch = comicNameSearch;
-        //         this.fetchComicSearchs(comicNameSearch);
-        //     }
-        // }
+        if (window.location.pathname === '/search') {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieNameSearch = urlParams.get('keyword');
+            this.page = parseInt(urlParams.get('page'), 10)
+            if (movieNameSearch) {
+                console.log(movieNameSearch)
+                console.log(this.page)
+                this.movieNameSearch = movieNameSearch;
+                this.fetchSearchMovies(movieNameSearch);
+            }
+        }
 
         // if (window.location.pathname === '/type') {
         //     const urlParams = new URLSearchParams(window.location.search);

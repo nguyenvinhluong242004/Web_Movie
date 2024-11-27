@@ -84,11 +84,16 @@ body {
 
 .info-cm {
     display: flex;
-    justify-content: center;
+    justify-content: left;
 }
 
 .info-cm .img {
     margin-right: 10px;
+    width: 25%;
+}
+
+.info-cm .infor {
+    width: 75%;
 }
 
 .tt-comic {
@@ -126,6 +131,13 @@ body {
         margin-right: 0px;
         margin-top: 3px;
         margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .info-cm .infor {
+        width: 100%;
     }
 
     .tt-comic {
@@ -154,6 +166,12 @@ body {
     /* Thêm dấu "..." khi vượt quá chiều rộng */
     max-width: 90%;
     /* Đảm bảo áp dụng trong giới hạn width của thẻ cha */
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #363535;
+    border-color: #000000;
+    color: #ffffffc4;
 }
 
 .pagination .page-link {

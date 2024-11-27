@@ -20,11 +20,21 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('#txtInput').on('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Ngăn hành động mặc định (nếu có)
+            vueApp.searchMovie(); // Gọi hàm tìm kiếm
+        }
+    });
+    $('#txtInput-ver2').on('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Ngăn hành động mặc định (nếu có)
+            vueApp.searchMovieVer2(); // Gọi hàm tìm kiếm
+        }
+    });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    
-    
-});
+
 
 

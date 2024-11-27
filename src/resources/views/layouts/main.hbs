@@ -24,7 +24,7 @@
                     <input type="text"
                         style="background-color: #383737d2; color: #cccccc; padding-left: 10px; height: 32px; font-size: 12px; width: 100%; padding-right: 30px;"
                         id="txtInput" placeholder="Tìm phim.." aria-label="Search">
-                    <a class="bi bi-search"
+                    <a class="bi bi-search" @click="searchMovie"
                         style="cursor: pointer; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 18px; color: #000;"></a>
                 </div>
                 <div class="pe-2" style="width: 200px; display: flex; justify-content: flex-end; align-items: center;">
@@ -37,11 +37,11 @@
                                 <li class="" style="position: relative; width: 100%; margin-right: 10px;">
                                     <input type="text"
                                         style="height: 32px; font-size: 12px; width: 100%; padding-right: 30px;"
-                                        id="txtInput-ver2" placeholder="Tìm truyện..." aria-label="Search">
-                                    <a class="bi bi-search"
+                                        id="txtInput-ver2" placeholder="Tìm phim..." aria-label="Search">
+                                    <a class="bi bi-search" @click="searchMovieVer2"
                                         style="cursor: pointer; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 18px; color: #000;"></a>
                                 </li>
-                                <li><a class="dropdown-item" href=""></a></li>
+                                {{!-- <li><a class="dropdown-item" href=""></a></li> --}}
                             </ul>
                         </div>
                         <div class="mr-3 d-flex align-items-center justify-content-center">
