@@ -12,7 +12,9 @@ require('dotenv').config({ path: './src/app/config/.env' });
 const pool = require('../config/database');
 
 const app = express();
-const port = process.env.PORT || 8888; // Sử dụng PORT từ .env hoặc mặc định là 8888
+const port = process.env.PORT || 6868; // Sử dụng PORT từ .env hoặc mặc định là 8888
+
+console.log(process.env.PORT)
 
 // Middleware log request
 app.use(morgan('dev'));
