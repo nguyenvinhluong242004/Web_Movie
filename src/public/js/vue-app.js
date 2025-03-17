@@ -225,7 +225,8 @@ const vueApp = new Vue({
             this.detailMovie = JSON.parse(sessionStorage.getItem('detailMovie'));
             this.listEpisodes = JSON.parse(sessionStorage.getItem('listEpisodes'));
             this.otherSeasons = JSON.parse(sessionStorage.getItem('otherSeasons'));
-            this.totalItems = this.listEpisodes.server_data.length;
+            if (this.listEpisodes)
+                this.totalItems = this.listEpisodes.server_data.length;
             // this.comic_detail = JSON.parse(sessionStorage.getItem('comic_detail'));
             // this.isLogin = JSON.parse(sessionStorage.getItem('isLogin'));
             // this.dataUser = JSON.parse(sessionStorage.getItem('dataUser'));
@@ -250,9 +251,6 @@ const vueApp = new Vue({
             const end = Math.min(this.page + 7, this.total_page); // Không vượt quá total_page
             console.log(Array.from({ length: end - start + 1 }, (_, i) => start + i))
             return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-        },
-        episodesList() {
-            return this.listEpisodes?.server_data || []; // Trả về mảng rỗng nếu `server_data` chưa có
         }
     },
     mounted() {
