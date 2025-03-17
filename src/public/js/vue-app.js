@@ -25,6 +25,8 @@ const vueApp = new Vue({
         totalItems: 0,
 
         movieNameSearch: '',
+        otherSeasons: null,
+        index_season: -1,
     },
     methods: {
         async fetchListMovies() {
@@ -76,6 +78,50 @@ const vueApp = new Vue({
                 alert('Có lỗi xảy ra khi đăng nhập');
             }
 
+        },
+        async fetchDataMovieRelated() {
+            const match = this.movieSlug.match(/phan-(\d+)/); // Tìm số phần từ slug
+
+            if (!match) return; // Nếu không có "phan-" thì không cần kiểm tra
+
+            const currentSeason = parseInt(match[1]); // Lấy số phần hiện tại
+            const baseSlug = this.movieSlug.replace(/phan-\d+/, ""); // Bỏ phần số để tái sử dụng slug
+
+            this.otherSeasons = []; // Danh sách các phần khác
+
+
+            for (let i = 1; ; i++) { // Giả sử tối đa 10 phần
+                if (i === currentSeason) {
+                    this.otherSeasons.push({
+                        name: `Phần ${i}`,
+                        slug: this.movieSlug,
+                    });
+                    continue;
+                }
+                const newSlug = `${baseSlug}phan-${i}`;
+                try {
+                    const response = await axios.post('/detail-movie/api', {
+                        slug: newSlug
+                    });
+                    const data = await response.data;
+
+                    console.log(data)
+
+                    if (data.success) {
+                        this.otherSeasons.push({
+                            name: `Phần ${i}`,
+                            slug: newSlug,
+                        });
+                    } else {
+                        break; // Nếu không tìm thấy phần tiếp theo thì dừng vòng lặp
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi gọi API:", error);
+                    break;
+                }
+            }
+
+            sessionStorage.setItem('otherSeasons', JSON.stringify(this.otherSeasons));
         },
         fetchInfomationVideo() {
             const playButton = document.getElementById("playButton");
@@ -168,7 +214,7 @@ const vueApp = new Vue({
         },
         switchMovie(val) {
             if (val === 'left' && this.episodeNumber - 1 > 0) {
-                window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[this.episodeNumber-2].slug}`;
+                window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[this.episodeNumber - 2].slug}`;
             }
             else if (val === 'right' && this.episodeNumber < this.totalItems) {
                 window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[this.episodeNumber].slug}`;
@@ -178,6 +224,7 @@ const vueApp = new Vue({
             console.log('get');
             this.detailMovie = JSON.parse(sessionStorage.getItem('detailMovie'));
             this.listEpisodes = JSON.parse(sessionStorage.getItem('listEpisodes'));
+            this.otherSeasons = JSON.parse(sessionStorage.getItem('otherSeasons'));
             this.totalItems = this.listEpisodes.server_data.length;
             // this.comic_detail = JSON.parse(sessionStorage.getItem('comic_detail'));
             // this.isLogin = JSON.parse(sessionStorage.getItem('isLogin'));
@@ -226,6 +273,17 @@ const vueApp = new Vue({
                 console.log(movieSlug)
                 this.movieSlug = movieSlug;
                 this.fetchDetailMovies();
+                const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === movieSlug);
+                if (!existsInOtherSeasons || !this.otherSeasons) {
+                    this.otherSeasons = null;
+                    this.fetchDataMovieRelated();
+                }
+                const match = movieSlug.match(/phan-(\d+)/); // Tìm số phần từ slug
+
+                if (match) {
+                    this.index_season = parseInt(match[1]); // Lấy số phần hiện tại
+                }
+    
             }
         }
 
@@ -239,7 +297,17 @@ const vueApp = new Vue({
                 this.movieSlug = slug;
                 this.episodeNumber = episodeNumber;
                 console.log(this.episodeNumber);
-                this.fetchInfomationVideo()
+                this.fetchInfomationVideo();
+                const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === slug);
+                if (!existsInOtherSeasons || !this.otherSeasons) {
+                    this.otherSeasons = null;
+                    this.fetchDataMovieRelated();
+                }
+                const match = slug.match(/phan-(\d+)/); // Tìm số phần từ slug
+
+                if (match) {
+                    this.index_season = parseInt(match[1]); // Lấy số phần hiện tại
+                }
             }
         }
 

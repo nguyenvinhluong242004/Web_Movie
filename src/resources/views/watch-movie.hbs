@@ -29,15 +29,13 @@
                     class="bi bi-exclamation-triangle-fill"></i> Báo lỗi</div>
         </div>
 
-        <div class="ml-4 mt-3 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">
-            <a href="" class="pr-2 pl-2 p-1 mr-2"
-                style="font-size: 14px; color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(141, 15, 214);">
-                <span>Phần 1</span>
+        <div v-if="otherSeasons" class="ml-4 mt-3 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">
+            <a v-for="(k, index) in otherSeasons" :href="DOMAIN+'detail-movie?id='+k.slug" class="pr-2 pl-2 p-1 mr-2 btn"
+                :class="{'btn-dark': index !== index_season - 1, 'btn-danger': index === index_season - 1}"
+                style="font-size: 14px; color: #fff; border: none; text-align: left; border-radius: 4px;">
+                <span>[[ k.name ]]</span>
             </a>
-            <a href="" class="pr-2 pl-2 p-1"
-                style="font-size: 14px; color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(141, 15, 214);">
-                <span>Phần 2</span>
-            </a>
+
         </div>
 
         <div class="d-flex ml-2 mr-2">
@@ -116,13 +114,13 @@
                         <img src="img/admin.jpg" class="" style="width: 50px; border: 1px solid seashell;" alt="Avatar">
                     </div>
                     <div class="flex-grow-1">
-                        <div class="" style="border: 1px solid black;">
+                        <div class="" style="border: 1px solid rgb(100, 100, 100);">
                             <div class="d-flex align-items-center">
                                 <h6 class="mb-0 m-2" style="color: rgb(0, 85, 255);">LuongSoSad</h6>
                                 <span class="badge bg-success" style="height: 20px;">Admin</span>
                             </div>
                             <hr color="gray" style="margin: 3px; height: 0.1px;">
-                            <div class="m-2">
+                            <div class="m-2" style="color: #cccccc;">
 
                                 <div>Chém gió nhiều hơn tại đây...</div>
                             </div>
@@ -136,7 +134,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            {{!-- <div class="mb-3">
                 <div class="card-comment d-flex">
                     <div class="mr-2">
                         <img src="img/user.jpg" class="" style="width: 50px; border: 1px solid seashell;" alt="Avatar">
@@ -161,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Nút xem thêm -->
             <div class="text-center">

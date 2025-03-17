@@ -13,7 +13,7 @@ class DetailMovieController {
         FetchDataProvider.fetchDetailMovie(slug)
             .then(data => {
                 //console.log('Movies data:', data);
-                return res.json({ success: true, data: data, message: 'Lấy dữ liệu thành công' });
+                return res.json({ success: data.status, data: data, message: 'Lấy dữ liệu thành công' });
             })
             .catch(error => {
                 console.error('Failed to fetch comics:', error);
