@@ -1,4 +1,4 @@
-<div class="content-movie ">
+<div class="content-movie">
     <div class="video-container">
         <video controls></video>
         <div class="video-overlay">
@@ -12,13 +12,13 @@
             <a @click="switchMovie('left')" class="pr-1 pl-1 mr-2" :class="{'disabled': episodeNumber === 1}"
                 style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"
                 :style="episodeNumber === 1 ? 'opacity: 0.5; cursor: not-allowed;' : ''">
-                <i class="bi bi-caret-left-fill"></i> Tập trước
+                <i class="bi bi-caret-left-fill"></i> <p class="tname">Tập trước</p>
             </a>
 
             <a @click="switchMovie('right')" class="pr-1 pl-1 mr-2" :class="{'disabled': episodeNumber === totalItems}"
                 style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"
                 :style="episodeNumber === totalItems ? 'opacity: 0.5; cursor: not-allowed;' : ''">
-                Tập tiếp theo <i class="bi bi-caret-right-fill"></i>
+                <p class="tname">Tập tiếp theo</p> <i class="bi bi-caret-right-fill"></i>
             </a>
 
             <div id="toggleLights" class="pr-1 pl-1 mr-2"
@@ -26,7 +26,7 @@
                     class="bi bi-brightness-high-fill"></i> Tắt đèn</div>
             <div class="pr-1 pl-1 mr-2"
                 style="color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"><i
-                    class="bi bi-exclamation-triangle-fill"></i> Báo lỗi</div>
+                    class="bi bi-exclamation-triangle-fill"></i> <p class="tname">Báo lỗi</p></div>
         </div>
 
         <div v-if="otherSeasons" class="ml-4 mt-3 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">

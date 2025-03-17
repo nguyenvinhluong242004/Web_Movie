@@ -232,6 +232,7 @@ body {
     background-color: black;
 }
 
+
 /* Lớp phủ làm tối màn hình */
 .dim-overlay {
     position: fixed;
@@ -351,5 +352,11 @@ body {
         flex: 0 0 calc(100% / 2);
         /* 50% mỗi cột khi màn hình nhỏ */
         max-width: calc(100% / 2);
+    }
+    .video-container video {
+        height: 300px;
+    }
+    .tname {
+        display: none;
     }
 }
