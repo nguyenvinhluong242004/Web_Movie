@@ -22,6 +22,7 @@ const vueApp = new Vue({
 
         detailMovie: [],
         listEpisodes: [],
+        totalItems: 0,
 
         movieNameSearch: '',
     },
@@ -62,7 +63,8 @@ const vueApp = new Vue({
                     console.log(this.detailMovie)
 
                     this.listEpisodes = response.data.data.episodes[0];
-                    console.log(this.listEpisodes)
+                    console.log(this.listEpisodes.server_data.length)
+                    this.totalItems = this.listEpisodes.server_data.length;
 
                     sessionStorage.setItem('detailMovie', JSON.stringify(this.detailMovie));
                     sessionStorage.setItem('listEpisodes', JSON.stringify(this.listEpisodes));
@@ -161,10 +163,22 @@ const vueApp = new Vue({
                 //alert("Vui lòng nhập từ khóa tìm kiếm!");
             }
         },
+        chooseMovie(idx) {
+            window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[idx].slug}`;
+        },
+        switchMovie(val) {
+            if (val === 'left' && this.episodeNumber - 1 > 0) {
+                window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[this.episodeNumber-2].slug}`;
+            }
+            else if (val === 'right' && this.episodeNumber < this.totalItems) {
+                window.location.href = `/watch-movie?slug=${this.movieSlug}&id=${this.listEpisodes.server_data[this.episodeNumber].slug}`;
+            }
+        },
         fetchDataStorage() {
             console.log('get');
             this.detailMovie = JSON.parse(sessionStorage.getItem('detailMovie'));
             this.listEpisodes = JSON.parse(sessionStorage.getItem('listEpisodes'));
+            this.totalItems = this.listEpisodes.server_data.length;
             // this.comic_detail = JSON.parse(sessionStorage.getItem('comic_detail'));
             // this.isLogin = JSON.parse(sessionStorage.getItem('isLogin'));
             // this.dataUser = JSON.parse(sessionStorage.getItem('dataUser'));
@@ -192,6 +206,7 @@ const vueApp = new Vue({
         },
     },
     mounted() {
+        this.DOMAIN = new URL(window.location.href).origin + '/';
         this.fetchDataStorage();
 
         // Fetch danh sách truyện khi trang được tải
@@ -219,7 +234,9 @@ const vueApp = new Vue({
             const number = urlParams.get('id');
             const num = number.split('-');
             const episodeNumber = parseInt(num[1], 10);
+            const slug = urlParams.get('slug');
             if (episodeNumber) {
+                this.movieSlug = slug;
                 this.episodeNumber = episodeNumber;
                 console.log(this.episodeNumber);
                 this.fetchInfomationVideo()

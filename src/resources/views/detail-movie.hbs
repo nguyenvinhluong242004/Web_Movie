@@ -77,7 +77,8 @@
         </div>
 
         <div class="ml-4 mr-4 mt-3 mb-3 d-flex justify-content-between">
-            <a :href="DOMAIN+'watch-movie?id='+listEpisodes.server_data[listEpisodes.server_data.length-1].slug" class="pl-2 pr-2 p-1"
+            <a :href="DOMAIN+'watch-movie?id='+listEpisodes.server_data[listEpisodes.server_data.length-1].slug"
+                class="pl-2 pr-2 p-1"
                 style="color: #fff; border: none; text-align: left; border-radius: 4px; background-color: rgb(214, 154, 15);">
                 <i class="bi bi-play-circle"></i>
                 Xem phim
@@ -109,7 +110,10 @@
 
     <div class="mb-3" style="background-color: #131010;">
         <div class="button-grid ml-4 pt-3 pb-3">
-            <a :href="DOMAIN+'watch-movie?id='+episode.slug" class="btn btn-dark" v-for="episode in listEpisodes.server_data">[[ episode.name ]]</a>
+            <a @click="chooseMovie(index)" class="btn btn-dark"
+                v-for="(episode, index) in listEpisodes.server_data" :key="index">
+                [[ episode.name ]]
+            </a>
         </div>
     </div>
 

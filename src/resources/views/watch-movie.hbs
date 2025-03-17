@@ -9,12 +9,18 @@
     <div class="p-2" style="color: #cccccc;">
 
         <div class="d-flex btnControls" style="justify-content: right;">
-            <a href="" class="pr-1 pl-1 mr-2"
-                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px;"><i
-                    class="bi bi-caret-left-fill"></i> Tập trước</a>
-            <a href="" class="pr-1 pl-1 mr-2"
-                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px;">Tập tiếp
-                theo <i class="bi bi-caret-right-fill"></i></a>
+            <a @click="switchMovie('left')" class="pr-1 pl-1 mr-2" :class="{'disabled': episodeNumber === 1}"
+                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"
+                :style="episodeNumber === 1 ? 'opacity: 0.5; cursor: not-allowed;' : ''">
+                <i class="bi bi-caret-left-fill"></i> Tập trước
+            </a>
+
+            <a @click="switchMovie('right')" class="pr-1 pl-1 mr-2" :class="{'disabled': episodeNumber === totalItems}"
+                style="text-decoration: none; color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"
+                :style="episodeNumber === totalItems ? 'opacity: 0.5; cursor: not-allowed;' : ''">
+                Tập tiếp theo <i class="bi bi-caret-right-fill"></i>
+            </a>
+
             <div id="toggleLights" class="pr-1 pl-1 mr-2"
                 style="color: #cccccc; background-color: #25354c; border-radius: 5px; cursor: pointer;"><i
                     class="bi bi-brightness-high-fill"></i> Tắt đèn</div>
@@ -42,10 +48,14 @@
 
         <div class="mb-3" style="background-color: #131010;">
             <div class="button-grid ml-4 pt-3 pb-3">
-                <a :href="DOMAIN+'watch-movie?id='+episode.slug" class="btn btn-dark"
-                    v-for="episode in listEpisodes.server_data">[[ episode.name ]]</a>
+                <a @click="chooseMovie(index)" class="btn"
+                    :class="{'btn-dark': index !== episodeNumber - 1, 'btn-primary': index === episodeNumber - 1}"
+                    v-for="(episode, index) in listEpisodes.server_data" :key="index">
+                    [[ episode.name ]]
+                </a>
             </div>
         </div>
+
 
         <div class="mt-4 mb-3 d-flex pt-2 pb-2" style="background-color: #131010;">
             <div class="ml-2 pr-2 bi bi-calendar2-event-fill"
