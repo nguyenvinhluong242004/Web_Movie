@@ -274,17 +274,24 @@ const vueApp = new Vue({
                 console.log(movieSlug)
                 this.movieSlug = movieSlug;
                 this.fetchDetailMovies();
-                const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === movieSlug);
-                if (!existsInOtherSeasons || !this.otherSeasons) {
+                if (!this.otherSeasons) {
                     this.otherSeasons = null;
                     this.fetchDataMovieRelated();
                 }
+                else {
+                    const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === movieSlug);
+                    if (!existsInOtherSeasons) {
+                        this.otherSeasons = null;
+                        this.fetchDataMovieRelated();
+                    }
+                }
+
                 const match = movieSlug.match(/phan-(\d+)/); // Tìm số phần từ slug
 
                 if (match) {
                     this.index_season = parseInt(match[1]); // Lấy số phần hiện tại
                 }
-    
+
             }
         }
 
@@ -299,10 +306,16 @@ const vueApp = new Vue({
                 this.episodeNumber = episodeNumber;
                 console.log(this.episodeNumber);
                 this.fetchInfomationVideo();
-                const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === slug);
-                if (!existsInOtherSeasons || !this.otherSeasons) {
+                if (!this.otherSeasons) {
                     this.otherSeasons = null;
                     this.fetchDataMovieRelated();
+                }
+                else {
+                    const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === movieSlug);
+                    if (!existsInOtherSeasons) {
+                        this.otherSeasons = null;
+                        this.fetchDataMovieRelated();
+                    }
                 }
                 const match = slug.match(/phan-(\d+)/); // Tìm số phần từ slug
 
