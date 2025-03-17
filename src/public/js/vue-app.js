@@ -311,7 +311,7 @@ const vueApp = new Vue({
                     this.fetchDataMovieRelated();
                 }
                 else {
-                    const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === movieSlug);
+                    const existsInOtherSeasons = this.otherSeasons.find(season => season.slug === slug);
                     if (!existsInOtherSeasons) {
                         this.otherSeasons = null;
                         this.fetchDataMovieRelated();
