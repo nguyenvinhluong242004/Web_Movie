@@ -251,6 +251,9 @@ const vueApp = new Vue({
             console.log(Array.from({ length: end - start + 1 }, (_, i) => start + i))
             return Array.from({ length: end - start + 1 }, (_, i) => start + i);
         },
+        episodesList() {
+            return this.listEpisodes?.server_data || []; // Trả về mảng rỗng nếu `server_data` chưa có
+        }
     },
     mounted() {
         this.DOMAIN = new URL(window.location.href).origin + '/';
