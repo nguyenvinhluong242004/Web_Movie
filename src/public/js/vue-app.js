@@ -27,6 +27,7 @@ const vueApp = new Vue({
         movieNameSearch: '',
         otherSeasons: null,
         index_season: -1,
+        isLoadDataMOvie: false,
     },
     methods: {
         async fetchListMovies() {
@@ -68,6 +69,10 @@ const vueApp = new Vue({
                     console.log(this.listEpisodes.server_data.length)
                     this.totalItems = this.listEpisodes.server_data.length;
 
+                    // Đánh dấu data movie đã được load
+                    this.isLoadDataMOvie = true;
+
+                    sessionStorage.setItem('isLoadDataMOvie', JSON.stringify(this.isLoadDataMOvie));
                     sessionStorage.setItem('detailMovie', JSON.stringify(this.detailMovie));
                     sessionStorage.setItem('listEpisodes', JSON.stringify(this.listEpisodes));
                 } else {
@@ -222,6 +227,7 @@ const vueApp = new Vue({
         },
         fetchDataStorage() {
             console.log('get');
+            this.isLoadDataMOvie = JSON.parse(sessionStorage.getItem('isLoadDataMOvie'));
             this.detailMovie = JSON.parse(sessionStorage.getItem('detailMovie'));
             this.listEpisodes = JSON.parse(sessionStorage.getItem('listEpisodes'));
             this.otherSeasons = JSON.parse(sessionStorage.getItem('otherSeasons'));
@@ -303,6 +309,9 @@ const vueApp = new Vue({
             const slug = urlParams.get('slug');
             if (episodeNumber) {
                 this.movieSlug = slug;
+                if (!this.isLoadDataMOvie){
+                    this.fetchDetailMovies();
+                }
                 this.episodeNumber = episodeNumber;
                 console.log(this.episodeNumber);
                 this.fetchInfomationVideo();
