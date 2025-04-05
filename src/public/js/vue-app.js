@@ -66,6 +66,8 @@ const vueApp = new Vue({
                     console.log(this.detailMovie)
 
                     this.listEpisodes = response.data.data.episodes[0];
+                    console.log(response.data.data.episodes[0])
+                    console.log(this.listEpisodes.server_data[0])
                     console.log(this.listEpisodes.server_data.length)
                     this.totalItems = this.listEpisodes.server_data.length;
 
@@ -305,8 +307,14 @@ const vueApp = new Vue({
             const urlParams = new URLSearchParams(window.location.search);
             const number = urlParams.get('id');
             const num = number.split('-');
-            const episodeNumber = parseInt(num[1], 10);
+            let episodeNumber = parseInt(num[1], 10);
             const slug = urlParams.get('slug');
+            console.log(episodeNumber)
+            console.log(isNaN(episodeNumber))
+            if (isNaN(episodeNumber) || episodeNumber === null) {
+                episodeNumber = 1;
+                console.log("episodeNumber")
+            }
             if (episodeNumber) {
                 this.movieSlug = slug;
                 if (!this.isLoadDataMOvie){
