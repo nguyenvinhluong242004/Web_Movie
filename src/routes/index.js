@@ -6,10 +6,6 @@ const path = require("path");
 
 function route(app) {
 
-    app.use("/tiktokihsyNtbiXnl4eQIZ8G14VFmfGJwpgroK.txt", (req, res) => {
-        res.sendFile(path.join(__dirname, "../app/config/tiktokihsyNtbiXnl4eQIZ8G14VFmfGJwpgroK.txt"));
-    });
-
     app.use('/watch-movie', watchMovie);
     
     app.use('/detail-movie', detailMovie);
